@@ -1,0 +1,38 @@
+<%- include('fragments/head.ejs') %>
+<body>
+<%- include('fragments/nav.ejs') %>
+
+<main>
+  <h1>Profil utilisateur</h1>
+
+  <% if (user) { %>
+    <div class="profil-card">
+      <div class="profil-avatar">
+        <% if (user.profil_picture) { %>
+          <img src="<%= user.profil_picture %>" alt="Photo de profil">
+        <% } else { %>
+          <div class="avatar-placeholder">👤</div>
+        <% } %>
+      </div>
+
+      <div class="profil-info">
+        <p><strong>Identifiant :</strong> <%= user.login %></p>
+        <p><strong>Rôle :</strong> <%= user.profil %></p>
+        <p><strong>ID MongoDB :</strong> <%= user._id %></p>
+      </div>
+    </div>
+
+    <div class="profil-actions">
+      <button onclick="alert('Fonction à venir : modification du profil')">
+        Modifier le profil
+      </button>
+      <button onclick="window.location.href='/logout'">Se déconnecter</button>
+    </div>
+  <% } else { %>
+    <p class="muted">Aucune donnée utilisateur disponible.</p>
+  <% } %>
+</main>
+
+<%- include('fragments/footer.ejs') %>
+</body>
+</html>

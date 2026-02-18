@@ -1,0 +1,16 @@
+<header>
+    <nav>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/jeu">Le Juste Prix</a></li>
+        <li><a href="/calculs">Modules de Calcul</a></li>
+        <% if (isLoggedIn) { %>
+          <li><a href="/profil">Profil (<%= username %>)</a></li>
+          <li><a href="/logs">Logs</a></li>
+          <li><a href="/logout">Déconnexion</a></li>
+        <% } else { %>
+          <li><a href="/login">Connexion</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>  

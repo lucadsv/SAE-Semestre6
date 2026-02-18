@@ -1,0 +1,31 @@
+<%- include('fragments/head.ejs') %>
+<body>
+<%- include('fragments/nav.ejs') %>
+
+<main>
+  <div class="jeu-container">
+    <h1>Le jeu du Juste Prix</h1>
+    <p>Devine le nombre aléatoire entre 1 et 20 !</p>
+
+    <div class="jeu-input">
+      <input type="number" id="guess" min="1" max="20" placeholder="Entre ton nombre">
+      <button id="submitGuess">Essayer</button>
+    </div>
+
+    <h2>Tentatives :</h2>
+    <ul id="guessList"></ul>
+
+    <h2>Historique des parties :</h2>
+    <table>
+      <thead>
+        <tr><th>Partie</th><th>Nombre de coups</th></tr>
+      </thead>
+      <tbody id="historyTable"></tbody>
+    </table>
+  </div>
+</main>
+
+<script src="/js/jeu.js"></script>
+<%- include('fragments/footer.ejs') %>
+</body>
+</html>
