@@ -26,9 +26,9 @@
             <% if (user.login === 'adminweb' || user.login === 'sysadmin') { %>
               <span>Protege</span>
             <% } else { %>
-              <form action="/admin/manage-accounts/delete" method="post" style="display:inline;">
+              <form class="inline-form" action="/admin/manage-accounts/delete" method="post" style="display:inline;">
                 <input type="hidden" name="userId" value="<%= user._id %>">
-                <button type="submit">Supprimer</button>
+                <button class="delete-account-btn" type="submit">Supprimer</button>
               </form>
             <% } %>
           </td>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="ClusterLab logo">
+  <rect width="120" height="120" rx="16" fill="#8B90AC"/>
+  <circle cx="60" cy="60" r="34" fill="#1e1e2f"/>
+  <text x="60" y="68" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="700">CL</text>
+</svg>

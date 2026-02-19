@@ -1,24 +1,47 @@
-<header>
-    <nav>
+<header class="barnav">
+  <a href="/" aria-label="Accueil">
+    <img src="/images/ClusterLabLogo.png" alt="Logo ClusterLab" class="logo">
+  </a>
+  <h1>ClusterLab</h1>
+  <% if (isLoggedIn) { %>
+    <div class="barnav-right">
+      <div class="menu-burger" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <% if (username === 'adminweb') { %>
+        <a class="avatar-link" href="/profil" aria-label="Profil"><div class="avatar-text">AW</div></a>
+      <% } else if (username === 'sysadmin') { %>
+        <a class="avatar-link" href="/profil" aria-label="Profil"><div class="avatar-text">AS</div></a>
+      <% } else { %>
+        <a class="avatar-link" href="/profil" aria-label="Profil"><div class="avatar-text"><%= (username || '?').charAt(0).toUpperCase() %></div></a>
+      <% } %>
+    </div>
+
+    <nav class="menu-deroulant" id="menu-deroulant">
       <ul>
-        <li><a href="/">Accueil</a></li>
-        <% if (isLoggedIn) { %>
-          <% if (username !== 'sysadmin' && username !== 'adminweb') { %>
-            <li><a href="/jeu">Le Juste Prix</a></li>
-            <li><a href="/calculs">Modules de Calcul</a></li>
-          <% } %>
-          <li><a href="/profil">Profil (<%= username %>)</a></li>
-          <% if (username === 'sysadmin') { %>
-            <li><a href="/logs">Logs</a></li>
-          <% } %>
-          <% if (username === 'adminweb') { %>
-            <li><a href="/admin/create-accounts">Creer comptes</a></li>
-            <li><a href="/admin/manage-accounts">Gerer comptes</a></li>
-          <% } %>
-          <li><a href="/logout">Déconnexion</a></li>
-        <% } else { %>
-          <li><a href="/login">Connexion</a></li>
+        <li><a href="/profil">Profil</a></li>
+        <% if (username !== 'sysadmin' && username !== 'adminweb') { %>
+          <li><a href="/jeu">Le Juste Prix</a></li>
+          <li><a href="/calculs">Modules de Calcul</a></li>
         <% } %>
+        <% if (username === 'adminweb') { %>
+          <li><a href="/admin/manage-accounts">Gerer les comptes</a></li>
+          <li><a href="/admin/create-accounts">Creer les comptes</a></li>
+        <% } %>
+        <% if (username === 'sysadmin') { %>
+          <li><a href="/logs">Consulter les logs</a></li>
+        <% } %>
+        <li><a href="/logout">Deconnexion</a></li>
       </ul>
     </nav>
-  </header>  
+  <% } else { %>
+    <nav>
+      <ol>
+        <li><button type="button" class="button_barnav" onclick="window.location.href='/register'">Inscription</button></li>
+        <li><button type="button" class="button_barnav" onclick="window.location.href='/login'">Connexion</button></li>
+      </ol>
+    </nav>
+  <% } %>
+</header>

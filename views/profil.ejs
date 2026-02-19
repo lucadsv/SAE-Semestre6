@@ -31,7 +31,7 @@
 
     <div class="profil-actions">
       <% if (user.login !== 'adminweb' && user.login !== 'sysadmin') { %>
-        <form action="/profil/update" method="post">
+        <form class="form-panel" action="/profil/update" method="post">
           <div>
             <label for="login">Modifier identifiant</label>
             <input id="login" name="login" type="text" value="<%= user.login %>" required>
@@ -46,8 +46,8 @@
           </div>
           <button type="submit">Enregistrer</button>
         </form>
-        <form action="/profil/delete" method="post" onsubmit="return confirm('Supprimer definitivement votre compte ?');">
-          <button type="submit">Supprimer mon compte</button>
+        <form class="form-panel form-panel-compact" action="/profil/delete" method="post" onsubmit="return confirm('Supprimer definitivement votre compte ?');">
+          <button class="delete-account-btn" type="submit">Supprimer mon compte</button>
         </form>
       <% } else { %>
         <p>Compte systeme: modification du profil desactivee.</p>

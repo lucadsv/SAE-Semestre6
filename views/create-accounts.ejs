@@ -2,7 +2,7 @@
 <body>
 <%- include('fragments/nav.ejs') %>
 
-<main>
+<main class="create-accounts-page">
   <h1>Creer comptes</h1>
 
   <% if (error) { %>
@@ -12,36 +12,38 @@
     <p><%= message %></p>
   <% } %>
 
-  <section>
-    <h2>Creation manuelle</h2>
-    <form action="/admin/create-accounts/manual" method="post">
-      <div>
-        <label for="login">Identifiant</label>
-        <input id="login" name="login" type="text" required>
-      </div>
-      <div>
-        <label for="password">Mot de passe</label>
-        <input id="password" name="password" type="password" minlength="8" required>
-      </div>
-      <button type="submit">Creer le compte</button>
-    </form>
-  </section>
+  <div class="create-accounts-grid">
+    <section class="create-card">
+      <h2>Creation manuelle</h2>
+      <form class="form-panel" action="/admin/create-accounts/manual" method="post">
+        <div>
+          <label for="login">Identifiant</label>
+          <input id="login" name="login" type="text" required>
+        </div>
+        <div>
+          <label for="password">Mot de passe</label>
+          <input id="password" name="password" type="password" minlength="8" required>
+        </div>
+        <button type="submit">Creer le compte</button>
+      </form>
+    </section>
 
-  <section>
-    <h2>Import CSV</h2>
-    <p>Format attendu: <code>identifiant,motdepasse</code> (une ligne par compte).</p>
-    <form action="/admin/create-accounts/csv" method="post">
-      <div>
-        <label for="csvFile">Importer un fichier CSV</label>
-        <input id="csvFile" type="file" accept=".csv,text/csv">
-      </div>
-      <div>
-        <label for="csvData">Ou coller le CSV</label>
-        <textarea id="csvData" name="csvData" rows="8" cols="60" placeholder="user1,password123&#10;user2,password456"></textarea>
-      </div>
-      <button type="submit">Importer</button>
-    </form>
-  </section>
+    <section class="create-card">
+      <h2>Import CSV</h2>
+      <p>Format attendu: <code>identifiant,motdepasse</code> (une ligne par compte).</p>
+      <form class="form-panel" action="/admin/create-accounts/csv" method="post">
+        <div>
+          <label for="csvFile">Importer un fichier CSV</label>
+          <input id="csvFile" type="file" accept=".csv,text/csv">
+        </div>
+        <div>
+          <label for="csvData">Ou coller le CSV</label>
+          <textarea id="csvData" name="csvData" rows="8" cols="60" placeholder="user1,password123&#10;user2,password456"></textarea>
+        </div>
+        <button type="submit">Importer</button>
+      </form>
+    </section>
+  </div>
 </main>
 
 <script>
