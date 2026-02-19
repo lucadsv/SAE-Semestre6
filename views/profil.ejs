@@ -6,6 +6,13 @@
   <h1>Profil utilisateur</h1>
 
   <% if (user) { %>
+    <% if (error) { %>
+      <p class="muted"><%= error %></p>
+    <% } %>
+    <% if (message) { %>
+      <p><%= message %></p>
+    <% } %>
+
     <div class="profil-card">
       <div class="profil-avatar">
         <% if (user.profil_picture) { %>
@@ -23,10 +30,28 @@
     </div>
 
     <div class="profil-actions">
-      <button onclick="alert('Fonction à venir : modification du profil')">
-        Modifier le profil
-      </button>
-      <button onclick="window.location.href='/logout'">Se déconnecter</button>
+      <% if (user.login !== 'adminweb' && user.login !== 'sysadmin') { %>
+        <form action="/profil/update" method="post">
+          <div>
+            <label for="login">Modifier identifiant</label>
+            <input id="login" name="login" type="text" value="<%= user.login %>" required>
+          </div>
+          <div>
+            <label for="password">Nouveau mot de passe (optionnel)</label>
+            <input id="password" name="password" type="password" minlength="8">
+          </div>
+          <div>
+            <label for="confirmPassword">Confirmer nouveau mot de passe</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" minlength="8">
+          </div>
+          <button type="submit">Enregistrer</button>
+        </form>
+        <form action="/profil/delete" method="post" onsubmit="return confirm('Supprimer definitivement votre compte ?');">
+          <button type="submit">Supprimer mon compte</button>
+        </form>
+      <% } else { %>
+        <p>Compte systeme: modification du profil desactivee.</p>
+      <% } %>
     </div>
   <% } else { %>
     <p class="muted">Aucune donnée utilisateur disponible.</p>

@@ -2,8 +2,49 @@
 <body>
 <%- include('fragments/nav.ejs') %>
 <main>
-  <h1>Bienvenue sur ClusterLab</h1>
-  <p>Refonte Express + MongoDB – Simulation du cluster Raspberry.</p>
+  <section class="hero">
+    <h1>Bienvenue sur ClusterLab</h1>
+    <p>Plateforme de demonstration Express + MongoDB pour le suivi du cluster, les calculs distribues et l'administration des comptes.</p>
+    <div class="hero-actions">
+      <% if (!isLoggedIn) { %>
+        <a class="button-link" href="/login">Se connecter</a>
+        <a class="button-link button-outline" href="/register">Creer un compte</a>
+      <% } else if (username === 'adminweb') { %>
+        <a class="button-link" href="/admin/create-accounts">Creer comptes</a>
+        <a class="button-link button-outline" href="/admin/manage-accounts">Gerer comptes</a>
+      <% } else if (username === 'sysadmin') { %>
+        <a class="button-link" href="/logs">Voir les logs</a>
+        <a class="button-link button-outline" href="/profil">Mon profil</a>
+      <% } else { %>
+        <a class="button-link" href="/jeu">Jouer au Juste Prix</a>
+        <a class="button-link button-outline" href="/calculs">Lancer les calculs</a>
+      <% } %>
+    </div>
+  </section>
+
+  <section class="feature-grid">
+    <article class="feature-card">
+      <h2>Authentification securisee</h2>
+      <p>Sessions serveur et mots de passe hashes avec scrypt pour limiter les risques en cas de fuite de base.</p>
+    </article>
+    <article class="feature-card">
+      <h2>Administration dediee</h2>
+      <p>Comptes systeme separes: sysadmin pour les journaux et adminweb pour la creation et la gestion des comptes.</p>
+    </article>
+    <article class="feature-card">
+      <h2>Outils pedagogiques</h2>
+      <p>Jeu du Juste Prix et modules de calcul pour illustrer des fonctionnalites web et des interactions utilisateur.</p>
+    </article>
+  </section>
+
+  <section class="status-panel">
+    <h2>Etat de la session</h2>
+    <% if (isLoggedIn) { %>
+      <p>Connecte en tant que <strong><%= username %></strong>.</p>
+    <% } else { %>
+      <p>Aucune session active. Connecte-toi pour acceder aux modules du site.</p>
+    <% } %>
+  </section>
 </main>
 <%- include('fragments/footer.ejs') %>
 </body>

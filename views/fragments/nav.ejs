@@ -2,11 +2,19 @@
     <nav>
       <ul>
         <li><a href="/">Accueil</a></li>
-        <li><a href="/jeu">Le Juste Prix</a></li>
-        <li><a href="/calculs">Modules de Calcul</a></li>
         <% if (isLoggedIn) { %>
+          <% if (username !== 'sysadmin' && username !== 'adminweb') { %>
+            <li><a href="/jeu">Le Juste Prix</a></li>
+            <li><a href="/calculs">Modules de Calcul</a></li>
+          <% } %>
           <li><a href="/profil">Profil (<%= username %>)</a></li>
-          <li><a href="/logs">Logs</a></li>
+          <% if (username === 'sysadmin') { %>
+            <li><a href="/logs">Logs</a></li>
+          <% } %>
+          <% if (username === 'adminweb') { %>
+            <li><a href="/admin/create-accounts">Creer comptes</a></li>
+            <li><a href="/admin/manage-accounts">Gerer comptes</a></li>
+          <% } %>
           <li><a href="/logout">Déconnexion</a></li>
         <% } else { %>
           <li><a href="/login">Connexion</a></li>

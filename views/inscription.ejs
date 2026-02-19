@@ -1,0 +1,36 @@
+<%- include('fragments/head.ejs') %>
+<body>
+<%- include('fragments/nav.ejs') %>
+
+<main>
+  <h1>Inscription</h1>
+
+  <% if (error) { %>
+    <p class="muted"><%= error %></p>
+  <% } %>
+
+  <form action="/register" method="post">
+    <div>
+      <label for="login">Identifiant</label>
+      <input id="login" name="login" type="text" required>
+    </div>
+
+    <div>
+      <label for="password">Mot de passe</label>
+      <input id="password" name="password" type="password" minlength="8" required>
+    </div>
+
+    <div>
+      <label for="confirmPassword">Confirmer le mot de passe</label>
+      <input id="confirmPassword" name="confirmPassword" type="password" minlength="8" required>
+    </div>
+
+    <button type="submit">Creer le compte</button>
+  </form>
+
+  <p>Vous avez deja un compte ? <a href="/login">Connexion</a></p>
+</main>
+
+<%- include('fragments/footer.ejs') %>
+</body>
+</html>

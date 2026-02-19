@@ -10,12 +10,15 @@ const profilRoutes = require('./routes/profil');
 const logsRoutes = require('./routes/logs');
 const jeuRoutes = require('./routes/jeu');
 const calcRoutes = require('./routes/calc');
+const adminRoutes = require('./routes/admin');
+const requireAuth = require('./middleware/requireAuth');
+const requireSysadmin = require('./middleware/requireSysadmin');
+const requireAdminweb = require('./middleware/requireAdminweb');
+const requireRegularUser = require('./middleware/requireRegularUser');
 
 const { connectDB } = require('./config/database');
+const { ensureSystemUsers } = require('./services/systemUsers');
 const app = express();
-
-// Connexion MongoDB
-connectDB();
 
 // Moteur de rendu
 app.set('view engine', 'ejs');
@@ -33,15 +36,17 @@ app.use(session({
 app.use((req, res, next) => {
     res.locals.isLoggedIn = !!req.session.userId;
     res.locals.username = req.session.username || null;
+    res.locals.userRole = req.session.profil || null;
     next();
 });
 
 // Routes
 app.use('/', mainRoutes);
-app.use('/profil', profilRoutes);
-app.use('/logs', logsRoutes);
-app.use('/jeu', jeuRoutes);
-app.use('/calculs', calcRoutes);
+app.use('/profil', requireAuth, profilRoutes);
+app.use('/logs', requireAuth, requireSysadmin, logsRoutes);
+app.use('/jeu', requireAuth, requireRegularUser, jeuRoutes);
+app.use('/calculs', requireAuth, requireRegularUser, calcRoutes);
+app.use('/admin', requireAuth, requireAdminweb, adminRoutes);
 
 // Erreur 404
 app.use((req, res) => {
@@ -49,5 +54,15 @@ app.use((req, res) => {
 });
 
 // Lancement serveur
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Serveur lancé sur le port ${PORT}`));
+const startServer = async () => {
+    await connectDB();
+    await ensureSystemUsers();
+
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => console.log(`Serveur lancé sur le port ${PORT}`));
+};
+
+startServer().catch((err) => {
+    console.error('Erreur au demarrage :', err.message);
+    process.exit(1);
+});
