@@ -226,7 +226,7 @@
     cursor: pointer;
 }
 
-.barnav h1 {
+.barnav .brand-title {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -250,9 +250,11 @@
 }
 
 .barnav .button_barnav {
+    display: inline-block;
     background-color: white;
     border: none;
     color: #1e1e2f;
+    text-decoration: none;
     font-size: 16px;
     font-weight: bold;
     padding: 8px 15px;
@@ -283,7 +285,7 @@ footer div {
     padding: 10px 20px;
 }
 
-footer h1 {
+footer h2 {
     font-size: 20px;
     margin-bottom: 15px;
     border-bottom: 2px solid #007BFF;
@@ -335,6 +337,9 @@ footer p {
 }
 
 .menu-burger {
+    background: transparent;
+    border: none;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -349,6 +354,11 @@ footer p {
     background-color: white;
     border-radius: 3px;
     transition: all 0.3s ease;
+}
+
+.menu-burger:focus-visible {
+    outline: 3px solid #8B90AC;
+    outline-offset: 3px;
 }
 
 .avatar {
@@ -411,7 +421,7 @@ footer p {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #8B90AC;
+    background-color: #3f4f79;
     color: white;
     font-weight: bold;
     font-size: 18px;
@@ -425,11 +435,11 @@ footer p {
 }
 
 .avatar-text:hover {
-    background-color: #a1a6c4;
+    background-color: #30406a;
 }
 
-.avatar-link {
-    text-decoration: none;
+.avatar-badge {
+    display: inline-block;
 }
 
 .profil-container {
@@ -827,8 +837,16 @@ main button[type='submit']:hover,
 
 .jeu-input {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
     margin: 15px 0 20px 0;
+}
+
+.jeu-input label {
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
 }
 
 .jeu-input input {
@@ -885,10 +903,20 @@ main button[type='submit']:hover,
     font-size: 42px;
 }
 
-.profil-info p {
-    margin-bottom: 8px;
-    font-size: 22px;
-    text-align: center;
+.profil-details {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.profil-details dt {
+    font-weight: bold;
+}
+
+.profil-details dd {
+    margin: 0;
 }
 
 .profil-actions {

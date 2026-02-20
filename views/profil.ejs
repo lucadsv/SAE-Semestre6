@@ -23,9 +23,14 @@
       </div>
 
       <div class="profil-info">
-        <p><strong>Identifiant :</strong> <%= user.login %></p>
-        <p><strong>Rôle :</strong> <%= user.profil %></p>
-        <p><strong>ID MongoDB :</strong> <%= user._id %></p>
+        <dl class="profil-details">
+          <dt>Identifiant</dt>
+          <dd><%= user.login %></dd>
+          <dt>Rôle</dt>
+          <dd><%= user.profil %></dd>
+          <dt>ID MongoDB</dt>
+          <dd><%= user._id %></dd>
+        </dl>
       </div>
     </div>
 
@@ -46,7 +51,12 @@
           </div>
           <button type="submit">Enregistrer</button>
         </form>
-        <form class="form-panel form-panel-compact" action="/profil/delete" method="post" onsubmit="return confirm('Supprimer definitivement votre compte ?');">
+        <form
+          class="form-panel form-panel-compact"
+          action="/profil/delete"
+          method="post"
+          data-confirm-message="Supprimer definitivement votre compte ?"
+        >
           <button class="delete-account-btn" type="submit">Supprimer mon compte</button>
         </form>
       <% } else { %>

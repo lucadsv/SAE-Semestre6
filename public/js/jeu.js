@@ -8,13 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const input = document.getElementById('guess');
     const button = document.getElementById('submitGuess');
-    const list = document.getElementById('guessList');
     const historyTable = document.getElementById('historyTable');
     const container = document.querySelector('.jeu-container');
 
     function resetGame() {
         guesses = [];
-        list.innerHTML = "";
         randomNumber = Math.floor(Math.random() * 20) + 1;
         input.value = "";
     }
@@ -27,9 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         guesses.push(guess);
-        const li = document.createElement('li');
-        li.textContent = guess;
-        list.appendChild(li);
 
         if (guess < randomNumber) {
             alert("C’est plus !");

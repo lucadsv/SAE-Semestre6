@@ -1,17 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Animation de survol sur les liens du menu
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-        link.addEventListener('mouseover', () => link.classList.add('active'));
-        link.addEventListener('mouseout', () => link.classList.remove('active'));
-    });
-
     // Confirmation lors de la déconnexion
     const logoutLinks = document.querySelectorAll('a[href="/logout"]');
     logoutLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             if (!confirm("Souhaites-tu vraiment te déconnecter ?")) {
                 e.preventDefault();
+            }
+        });
+    });
+
+    const menu = document.getElementById('menu-deroulant');
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeMenu = () => {
+        if (!menu || !menuToggle) {
+            return;
+        }
+        menu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    if (menu && menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        window.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+    }
+
+    const confirmForms = document.querySelectorAll('form[data-confirm-message]');
+    confirmForms.forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            const message = form.getAttribute('data-confirm-message');
+            if (message && !confirm(message)) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    const calcButtons = document.querySelectorAll('.js-calc-action');
+    calcButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const message = button.getAttribute('data-alert');
+            if (message) {
+                alert(message);
             }
         });
     });
@@ -58,25 +100,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateCarousel();
         }
-    }
-});
-
-function toggleMenu() {
-    const menu = document.getElementById('menu-deroulant');
-    if (!menu) {
-        return;
-    }
-    menu.classList.toggle('active');
-}
-
-window.addEventListener('click', (e) => {
-    const menu = document.getElementById('menu-deroulant');
-    const burger = document.querySelector('.menu-burger');
-    if (!menu || !burger) {
-        return;
-    }
-
-    if (!menu.contains(e.target) && !burger.contains(e.target)) {
-        menu.classList.remove('active');
     }
 });

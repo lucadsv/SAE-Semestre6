@@ -1,25 +1,32 @@
 <header class="barnav">
-  <a href="/" aria-label="Accueil">
+  <a href="/" aria-label="Accueil ClusterLab">
     <img src="/images/ClusterLabLogo.png" alt="Logo ClusterLab" class="logo">
   </a>
-  <h1>ClusterLab</h1>
+  <h2 class="brand-title">ClusterLab</h2>
   <% if (isLoggedIn) { %>
     <div class="barnav-right">
-      <div class="menu-burger" onclick="toggleMenu()">
+      <button
+        type="button"
+        class="menu-burger"
+        id="menu-toggle"
+        aria-label="Ouvrir le menu utilisateur"
+        aria-controls="menu-deroulant"
+        aria-expanded="false"
+      >
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
-      </div>
+      </button>
       <% if (username === 'adminweb') { %>
-        <a class="avatar-link" href="/profil" aria-label="Profil"><div class="avatar-text">AW</div></a>
+        <div class="avatar-badge" aria-hidden="true"><div class="avatar-text">AW</div></div>
       <% } else if (username === 'sysadmin') { %>
-        <a class="avatar-link" href="/profil" aria-label="Profil"><div class="avatar-text">AS</div></a>
+        <div class="avatar-badge" aria-hidden="true"><div class="avatar-text">AS</div></div>
       <% } else { %>
-        <a class="avatar-link" href="/profil" aria-label="Profil"><div class="avatar-text"><%= (username || '?').charAt(0).toUpperCase() %></div></a>
+        <div class="avatar-badge" aria-hidden="true"><div class="avatar-text"><%= (username || '?').charAt(0).toUpperCase() %></div></div>
       <% } %>
     </div>
 
-    <nav class="menu-deroulant" id="menu-deroulant">
+    <nav class="menu-deroulant" id="menu-deroulant" aria-label="Menu utilisateur">
       <ul>
         <li><a href="/profil">Profil</a></li>
         <% if (username !== 'sysadmin' && username !== 'adminweb') { %>
@@ -39,8 +46,8 @@
   <% } else { %>
     <nav>
       <ol>
-        <li><button type="button" class="button_barnav" onclick="window.location.href='/register'">Inscription</button></li>
-        <li><button type="button" class="button_barnav" onclick="window.location.href='/login'">Connexion</button></li>
+        <li><a class="button_barnav" href="/register">Inscription</a></li>
+        <li><a class="button_barnav" href="/login">Connexion</a></li>
       </ol>
     </nav>
   <% } %>
