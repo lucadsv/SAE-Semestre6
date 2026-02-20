@@ -12,7 +12,16 @@
       <input type="number" id="guess" min="1" max="20" placeholder="Entre ton nombre">
       <button id="submitGuess">Essayer</button>
     </div>
-    <table>
+
+    <section class="current-game-history" aria-labelledby="current-game-history-title">
+      <h2 id="current-game-history-title">Historique des coups (partie en cours)</h2>
+      <p id="guessListHint" class="sr-only">La liste se met à jour après chaque essai.</p>
+      <p id="guessStatus" class="sr-only" aria-live="polite"></p>
+      <ul id="guessList" aria-describedby="guessListHint"></ul>
+    </section>
+
+    <table class="game-history-table">
+      <caption class="sr-only">Historique des parties terminées</caption>
       <thead>
         <tr><th>Partie</th><th>Nombre de coups</th></tr>
       </thead>
